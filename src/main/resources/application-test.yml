@@ -1,0 +1,6 @@
+my:
+  name: test
+  age: 20
+  salary: ${random.int}
+server:
+  port: 8083
