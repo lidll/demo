@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "获取用户信息11",notes = "获取用户信息")
+    @ApiOperation(value = "获取用户信息",notes = "获取用户信息")
     @ApiImplicitParam(name = "id",value = "用户ID",required = true,dataType = "Long")
     @GetMapping("/getUser")
     @ResponseBody
