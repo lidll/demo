@@ -10,12 +10,14 @@
         insert into user
         (
         name,
-        age
+        age,
+        create_date
         )
          values
         (
         #{name},
-        #{age}
+        #{age},
+        #{createDate}
         )
     </insert>
 </mapper>
