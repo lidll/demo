@@ -1,0 +1,16 @@
+server:
+  port: 7997
+#数据源配置
+spring:
+  datasource:
+    hikari:
+      db1:
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/demo-mult-1?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+      db2:
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/demo-mult-2?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
