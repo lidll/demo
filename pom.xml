@@ -11,6 +11,7 @@
         <module>springcloud-test-demo</module>
         <module>mybatis-mult-datasource</module>
         <module>spring-bean-validation</module>
+        <module>demo-base</module>
     </modules>
 
     <parent>
