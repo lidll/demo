@@ -42,10 +42,24 @@ public class ResponseDto<T> {
         return responseDto;
     }
 
+    public static ResponseDto success(String msg){
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setCode(200);
+        responseDto.setMsg(msg);
+        return responseDto;
+    }
+
     public static ResponseDto error(){
         ResponseDto responseDto = new ResponseDto();
         responseDto.setCode(500);
         responseDto.setMsg("error");
+        return responseDto;
+    }
+
+    public static ResponseDto error(String msg){
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setCode(500);
+        responseDto.setMsg(msg);
         return responseDto;
     }
 }

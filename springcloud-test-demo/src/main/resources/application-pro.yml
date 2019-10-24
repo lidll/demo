@@ -1,6 +1,0 @@
-my:
-  name: pro
-  age: 20
-  salary: ${random.int}
-server:
-  port: 8082

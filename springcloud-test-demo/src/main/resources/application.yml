@@ -1,7 +1,0 @@
-my:
-  name: noah
-  age: 20
-  salary: ${random.int}
-spring:
-  profiles:
-    active: dev
