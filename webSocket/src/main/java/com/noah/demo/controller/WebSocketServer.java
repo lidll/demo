@@ -2,8 +2,7 @@ package com.noah.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.ImmutableMap;
+import com.noah.demo.config.WS;
 import com.noah.demo.dto.TalkDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -13,10 +12,8 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @ClassName WsController
@@ -35,8 +32,6 @@ public class WebSocketServer {
     //旧：concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
 //    private static CopyOnWriteArraySet<WebSocketServer> webSokcetSet = new CopyOnWriteArraySet<WebSocketServer>();
 
-    //新:使用map对象,便于根据userId来获取对应的WebSocket
-    private static ConcurrentHashMap<String ,WebSocketServer> socketMap = new ConcurrentHashMap<>();
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
     //接收sid
@@ -54,7 +49,7 @@ public class WebSocketServer {
     public void onOpen(Session session, @PathParam("userId")String userId){
         try {
         this.session = session;
-        socketMap.put(userId,this);
+            WS.socketMap.put(userId,this);
         addOnlineCount();
         log.info("有新窗口开始监听:" + userId + ",当前在线人数为" + getOnlineCount());
         this.userId = userId;
@@ -74,8 +69,8 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose(){
-        if (socketMap.get(this.userId) != null) {
-            socketMap.remove(userId);
+        if (WS.socketMap.get(this.userId) != null) {
+            WS.socketMap.remove(userId);
         }
         //在线人数减1
         subOnlineCount();
@@ -103,14 +98,14 @@ public class WebSocketServer {
                     talkDTO.setFromUserId(this.userId);
                     //传送给对应用户的websocket
                     if(StringUtils.isNotBlank(talkDTO.getToUserId())&&StringUtils.isNotBlank(talkDTO.getContentText())){
-                        WebSocketServer socketx=socketMap.get(talkDTO.getToUserId());
+                        WebSocketServer socketx= WS.socketMap.get(talkDTO.getToUserId());
                         //需要进行转换，userId
                         if(socketx!=null){
                             talkDTO.setCode(302);
                             socketx.sendMessage(JSON.toJSONString(talkDTO));
                             //此处可以放置相关业务代码，例如存储到数据库
                         }else{
-                            WebSocketServer webSocketServer = socketMap.get(userId);
+                            WebSocketServer webSocketServer =  WS.socketMap.get(userId);
                             webSocketServer.sendMessage(JSON.toJSONString(TalkDTO.error("对方未登录")));
                         }
                     }
@@ -160,7 +155,7 @@ public class WebSocketServer {
     public static void sendInfo(String message,@PathParam("userId") String userId) {
         try {
             log.info("推送消息到窗口"+userId +",推送内容"+message);
-            Set<Map.Entry<String, WebSocketServer>> entries = socketMap.entrySet();
+            Set<Map.Entry<String, WebSocketServer>> entries =  WS.socketMap.entrySet();
             for (Map.Entry<String, WebSocketServer> entry : entries) {
                 if (entry.getKey().equals(userId)) {
                     entry.getValue().sendMessage(message);

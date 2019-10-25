@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>登录后开始聊天吧</title>
+    <link rel="stylesheet" href="/js/layui/css/layui.css">
+</head>
+<style>
+    .center-in-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+</style>
+<body>
+
+<div class="layui-container center-in-center">
+
+    <div>
+        <div class="layui-row">
+            <div class="layui-col-xs4  layui-col-md4">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" required value="noah" lay-verify="required"
+                                   placeholder="请输入名称" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <!--  <div class="layui-form-item">
+                          <label class="layui-form-label">密码框</label>
+                          <div class="layui-input-block">
+                              <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                          </div>
+                      </div>-->
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">点我进入聊天室~</button>
+                            <!--                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/layui/layui.js"></script>
+<script>
+    //${pageContext.request.contextPath}
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            var $1 = layui.jquery;
+            //layer.msg(JSON.stringify(data.field));
+            $1.ajax({
+                url: '/checkUser',
+                type: 'POST',
+                data: data.field,
+                success: function (data) {
+                    var code = data.code;
+                    if (code == 500) {
+                        layer.msg(data.msg)
+                    } else if (code == 200) {
+                        parent.location.href = '/goTalk';
+                    } else {
+                        return false;
+                    }
+                }
+            })
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
