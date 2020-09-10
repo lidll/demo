@@ -5,12 +5,15 @@ spring:
   datasource:
     hikari:
       db1:
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/demo-mult-1?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=Asia/Shanghai
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/noah-mult-1?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=Asia/Shanghai
         username: root
         password: 123456
         driver-class-name: com.mysql.jdbc.Driver
       db2:
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/demo-mult-2?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=Asia/Shanghai
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/noah-mult-2?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=Asia/Shanghai
         username: root
         password: 123456
         driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mybatis/db1/**/*.xml
+  type-aliases-package: com.noah.noah.db1.mybatis

@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = DataSourceConfig.PACKAGESPATH,sqlSessionTemplateRef = "dbSqlSessionTemplate")
 public class DataSourceConfig {
-    public static final String PACKAGESPATH = "com.noah.demo.dao";
+    public static final String PACKAGESPATH = "com.noah.noah.mybatis";
 
     /**
      *

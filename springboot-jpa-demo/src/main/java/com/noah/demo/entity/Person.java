@@ -1,6 +1,5 @@
 package com.noah.demo.entity;
 
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

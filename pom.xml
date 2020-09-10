@@ -8,12 +8,16 @@
     <packaging>pom</packaging>
     <modules>
         <module>springboot-jpa-demo</module>
-        <module>springcloud-test-demo</module>
         <module>mybatis-mult-datasource</module>
         <module>spring-bean-validation</module>
         <module>demo-base</module>
         <module>task-executor</module>
         <module>webSocket</module>
+        <module>chat</module>
+        <module>mybatis-xmlsql</module>
+        <module>thread</module>
+        <module>javaGame</module>
+        <module>jump-face</module>
     </modules>
 
     <parent>

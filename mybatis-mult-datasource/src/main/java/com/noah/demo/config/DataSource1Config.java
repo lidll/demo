@@ -1,16 +1,17 @@
 package com.noah.demo.config;
 
-import com.sun.xml.internal.bind.v2.util.DataSourceSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.serviceloader.ServiceListFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
@@ -25,7 +26,9 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = DataSource1Config.PACKAGESPATH,sqlSessionTemplateRef = "db1SqlSessionTemplate")
 public class DataSource1Config {
-    public static final String PACKAGESPATH = "com.noah.demo.db1";
+    public static final String PACKAGESPATH = "com.noah.noah.db1.mybatis";
+
+    //public static final String MAPPER_LICATION = "classpath*:mybatis/db1/**/*.xml";
 
     /**
      *
@@ -55,6 +58,8 @@ public class DataSource1Config {
     public SqlSessionFactory testSqlSessionFactory(@Qualifier("db1DataSource")DataSource dataSource) throws Exception{
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
+       // sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DataSource1Config.MAPPER_LICATION));
+        sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
         return sqlSessionFactoryBean.getObject();
     }
 

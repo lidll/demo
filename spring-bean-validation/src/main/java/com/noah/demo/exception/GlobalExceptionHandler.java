@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
      * @Description 拦截所有异常
      * @Date 2019-10-15 16:54
      * @param e
-     * @return org.springframework.http.ResponseEntity<com.noah.demo.exception.ErrorResponse>
+     * @return org.springframework.http.ResponseEntity<com.noah.noah.exception.ErrorResponse>
      */
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorResponse> exceptionHandler(Exception e){

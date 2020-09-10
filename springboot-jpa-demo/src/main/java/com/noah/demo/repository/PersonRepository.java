@@ -30,7 +30,7 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
      * @Description 查找比条件小的年龄的人
      * @Date 2019-10-14 17:23
      * @param age
-     * @return java.util.List<com.noah.demo.entity.Person>
+     * @return java.util.List<com.noah.noah.entity.Person>
      */
     List<Person> findByAgeLessThan(Integer age);
 
@@ -40,7 +40,7 @@ public interface PersonRepository extends JpaRepository<Person,Long> {
      * @Description sql查询 年龄比条件大的人
      * @Date 2019-10-14 17:26
      * @param age
-     * @return java.util.List<com.noah.demo.entity.Person>
+     * @return java.util.List<com.noah.noah.entity.Person>
      */
     @Query("select p from Person p where age > :age")
     List<Person> findByAgeGreaterThan(@Param("age") Integer age);

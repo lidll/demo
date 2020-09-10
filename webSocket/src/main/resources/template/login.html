@@ -29,7 +29,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-block">
-                            <input type="text" name="username" required value="noah" lay-verify="required"
+                            <input type="text" name="username" id="username" required value="noah" lay-verify="required"
                                    placeholder="请输入名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                       </div>-->
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="formDemo">点我进入聊天室~</button>
+                            <button class="layui-btn" lay-submit lay-filter="formDemo" id="submit">点我进入聊天室~</button>
                             <!--                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                         </div>
                     </div>
@@ -57,27 +57,48 @@
         var form = layui.form;
 
         //监听提交
-        form.on('submit(formDemo)', function (data) {
-            var $1 = layui.jquery;
-            //layer.msg(JSON.stringify(data.field));
-            $1.ajax({
-                url: '/checkUser',
-                type: 'POST',
-                data: data.field,
-                success: function (data) {
-                    var code = data.code;
-                    if (code == 500) {
-                        layer.msg(data.msg)
-                    } else if (code == 200) {
-                        parent.location.href = '/goTalk';
-                    } else {
-                        return false;
-                    }
-                }
-            })
-            return false;
-        });
+        // form.on('submit(formDemo)', function (data) {
+        //     var $1 = layui.jquery;
+        //     //layer.msg(JSON.stringify(data.field));
+        //     $1.ajax({
+        //         url: '/checkUser',
+        //         type: 'POST',
+        //         data: data.field,
+        //         success: function (data) {
+        //             var code = data.code;
+        //             if (code == 500) {
+        //                 layer.msg(data.msg)
+        //             } else if (code == 200) {
+        //                 parent.location.href = '/goTalk';
+        //             } else {
+        //                 return false;
+        //             }
+        //         }
+        //     })
+        //     return false;
+        // });
     });
+
+
+    var element = document.querySelector("#submit");
+    element.onclick(function () {
+        var username = $("#username").val();
+        $.ajax({
+            url: '/checkUser',
+            type: 'POST',
+            data: {username:username},
+            success: function (data) {
+                var code = data.code;
+                if (code == 500) {
+                    layer.msg(data.msg)
+                } else if (code == 200) {
+                    parent.location.href = '/goTalk';
+                } else {
+                    return false;
+                }
+            }
+        })
+    })
 </script>
 </body>
 </html>
