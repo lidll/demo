@@ -18,6 +18,12 @@
         <module>thread</module>
         <module>javaGame</module>
         <module>jump-face</module>
+        <module>test_demo</module>
+        <module>java-basis</module>
+        <module>JavaFX</module>
+        <module>jedis-demo</module>
+        <module>html-demo</module>
+        <module>reflect</module>
     </modules>
 
     <parent>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE> ZTREE DEMO </TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="demoStyle/demo.css" type="text/css">
+    <link rel="stylesheet" href="demoStyle/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="http://www.treejs.cn/v3/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="http://www.treejs.cn/v3/js/jquery.ztree.core.js"></script>
+    <SCRIPT LANGUAGE="JavaScript">
+        var zTreeObj;
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+        var setting = {
+            view: {
+                showLine: false,
+                showIcon: false,
+                selectedMulti: false,
+                dblClickExpand: false
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            // callback: {
+            //     // beforeClick: beforeClick
+            //     onClick:zTreeOnClick
+            // }
+        };
+        // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+        var zNodes = [
+            {name:"初始的文件夹"}
+        ];
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            var subNode = {
+                name:"我添加的文件",
+                icon: '/img/pdf.png',
+                value:"这是文件路径"
+            }
+            zTreeObj.addNodes(null,subNode)
+            zTreeObj.setting.callback.beforeClick = zTreeBeforeClick
+        });
+
+        function zTreeOnClick(event, treeId, treeNode) {
+            alert(treeNode.tId + "," + treeNode.name+ "," + treeNode.value);
+            return false;
+        }
+        function zTreeBeforeClick(treeId, treeNode, clickFlag) {
+            alert(treeId + "," + treeNode+ "," + clickFlag);
+            return false;
+        };
+    </SCRIPT>
+</HEAD>
+<BODY>
+<div>
+    <ul id="treeDemo" class="ztree"></ul>
+</div>
+</BODY>
+</HTML>
