@@ -2,7 +2,7 @@
 //
 //import com.noah.demo.db2.dao.SalaryDao;
 //import com.noah.demo.domain.Salary;
-//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.simpleFactory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //
 ///**

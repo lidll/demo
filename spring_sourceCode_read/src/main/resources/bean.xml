@@ -1,0 +1,5 @@
+<beans xmlns="http://www.springframework.org/schema/beans">
+    <bean class="com.noah.processor.MyBeanFactoryPostProcessor"></bean>
+
+    <bean id="user" class="com.noah.pojo.User"></bean>
+</beans>

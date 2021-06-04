@@ -49,6 +49,7 @@ public class AsyncConfig implements AsyncConfigurer {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 //        executor.setThreadNamePrefix("My ThreadPoolTaskExecutor-");
         executor.setThreadNamePrefix("MyThread-");
+        executor.setKeepAliveSeconds(3600);
         executor.initialize();
         return executor;
     }

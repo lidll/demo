@@ -24,6 +24,9 @@
         <module>jedis-demo</module>
         <module>html-demo</module>
         <module>reflect</module>
+        <module>learnLine</module>
+        <module>spring_sourceCode_read</module>
+        <module>design_patterns</module>
     </modules>
 
     <parent>
